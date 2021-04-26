@@ -3,12 +3,15 @@
     <img class="brand" alt="Vue logo" width="80px" src="./assets/logo.png">
     <h2 class="text-right">Shopping Cart: {{ product }}</h2>
     
+    <SearchBar :onSearch="handleSearchProducts" />
     <ProductForm :changeValue="changeValue" />
-    <ProductList :list="list" />
+    <ProductList :list="listSearch.length > 0 ? listSearch : list" />
+
   </div>
 </template>
 
 <script>
+import SearchBar from "./components/SearchBar";
 import ProductList from "./components/ProductList";
 import ProductForm from "./components/ProductForm";
 
@@ -17,11 +20,7 @@ export default {
   components: {
     ProductList,
     ProductForm,
-  },
-  data() {
-    return {
-      list: [],
-    };
+    SearchBar,
   },
   computed: {
     product: {
@@ -32,6 +31,7 @@ export default {
         this.list = this.list.concat({
           name: newValue.name,
           price: newValue.price,
+          category: newValue.category,
         });
       },
     },
@@ -40,6 +40,20 @@ export default {
     changeValue(newValue) {
       this.product = newValue;
     },
+    handleSearchProducts(text) {
+      const results = this.list.filter((p) => p.name == text);
+      if (results.length > 0) {
+        this.listSearch = results;
+      } else {
+        this.listSearch = this.list;
+      }
+    },
+  },
+  data() {
+    return {
+      list: [],
+      listSearch: [],
+    };
   },
 };
 </script>

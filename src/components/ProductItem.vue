@@ -1,6 +1,7 @@
 <template>
   <div class="item">
-    <h2>{{ item.name }}</h2>
+    <h2>{{ item.name }}<small class="category">({{ item.category }})</small></h2>
+     
     <p class="price float-right">U$ {{ item.price }}</p>
   </div>
 </template>
@@ -29,5 +30,8 @@ h2{
   width: 10%;
   display: inline-block;
   line-height: 60px;
+}
+.category{
+  font-size:15px;
 }
 </style>

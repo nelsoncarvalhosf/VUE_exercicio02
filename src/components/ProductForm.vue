@@ -11,6 +11,10 @@
         <label>Price:</label>
         <input class="form-control" type="number" v-model="price" />
       </p>
+      <p class="form-group">
+        <label>Category:</label>
+        <input class="form-control" type="text" v-model="category" />
+      </p>
       <button class="btn btn-secondary float-right" type="submit">ADD</button>
     </form>
   </div>
@@ -22,6 +26,7 @@ export default {
     return {
       name: "",
       price: "",
+      category: "",
       nameErrorMsg: "",
     };
   },
@@ -43,6 +48,7 @@ export default {
       this.changeValue({
         name: this.name,
         price: this.price,
+        category: this.category,
       });
     },
   },
